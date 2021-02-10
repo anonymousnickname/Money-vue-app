@@ -1,5 +1,4 @@
-# vue-youtube
-
+# money-vue-app
 ## Project setup
 ```
 npm install
