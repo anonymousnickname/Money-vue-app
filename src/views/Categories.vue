@@ -4,7 +4,9 @@
       <h3>{{'Categories'|localize}}</h3>
     </div>
     <section>
-      <Loader v-if="loading"/>
+     <div class="center-own" v-if="loading">
+    <Loader  />
+</div>
       <div class="row" v-else>
         <CategoryCreate @created="addNewCategory"/>
 

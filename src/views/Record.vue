@@ -4,7 +4,9 @@
       <h3>{{ 'Menu_NewRecord' | localize }}</h3>
     </div>
 
-    <Loader v-if="loading" />
+    <div class="center-own" v-if="loading">
+    <Loader  />
+</div>
 
     <p class="center" v-else-if="!categories.length">
       {{ 'NoCategories' | localize }}.

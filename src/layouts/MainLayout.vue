@@ -1,6 +1,8 @@
 <template>
   <div>
-    <Loader v-if="loading"/>
+    <div v-if="loading" class="center-own"> 
+    <Loader />
+    </div>
     <div class="app-main-layout" v-else>
       <Navbar :isDark="isDark " @click="isOpen = !isOpen"/>
 

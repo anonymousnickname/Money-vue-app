@@ -10,8 +10,9 @@
       <canvas ref="canvas"></canvas>
     </div>
 
-    <Loader v-if="loading" />
-
+    <div class="center-own" v-if="loading">
+      <Loader />
+    </div>
     <p class="center" v-else-if="!records.length">
       {{ 'NoRecords' | localize }}.
       <router-link to="/record">{{ 'AddFirst' | localize }}</router-link>
@@ -43,7 +44,7 @@ export default {
   name: 'history',
   metaInfo() {
     return {
-      title: this.$title('Menu_History')
+      title: this.$title('Menu_History'),
     };
   },
   extends: Pie,
@@ -52,42 +53,43 @@ export default {
     loading: true,
     records: [],
     newArr: [],
-    cats: []
+    cats: [],
   }),
   async mounted() {
     this.records = await this.$store.dispatch('fetchRecords');
     const categoires = await this.$store.dispatch('fetchCategories');
     this.cats = categoires;
-    this.newArr = this.records.map(r => {
+    this.newArr = this.records.map((r) => {
       return categoires.find(
-        c => r.categoryId === c.id && r.type === 'outcome'
+        (c) => r.categoryId === c.id && r.type === 'outcome'
       );
     });
-    const testArr = this.newArr.filter(el => el != null);
+    const testArr = this.newArr.filter((el) => el != null);
     this.setup(testArr);
     this.loading = false;
   },
   methods: {
     setup(data) {
       this.setupPagination(
-        this.records.map(record => {
+        this.records.map((record) => {
           return {
             ...record,
-            categoryName: this.cats.find(c => c.id === record.categoryId).title,
+            categoryName: this.cats.find((c) => c.id === record.categoryId)
+              .title,
             typeClass: record.type === 'income' ? 'green' : 'red',
             typeText:
               record.type === 'income'
                 ? localizeFilter('Income')
-                : localizeFilter('Outcome')
+                : localizeFilter('Outcome'),
           };
         })
       );
       this.renderChart({
-        labels: data.map(c => c.title),
+        labels: data.map((c) => c.title),
         datasets: [
           {
             label: localizeFilter('CostsForCategories'),
-            data: data.map(c => {
+            data: data.map((c) => {
               return this.records.reduce((total, r) => {
                 if (r.categoryId === c.id && r.type === 'outcome') {
                   total += +r.amount;
@@ -101,18 +103,18 @@ export default {
               'rgba(255, 206, 86, 0.2)',
               'rgba(75, 192, 192, 0.2)',
               'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
+              'rgba(255, 159, 64, 0.2)',
             ],
             borderColor: ['black', 'black', 'black', 'black', 'black', 'black'],
-            borderWidth: 1
-          }
-        ]
+            borderWidth: 1,
+          },
+        ],
       });
-    }
+    },
   },
   components: {
-    HistoryTable
-  }
+    HistoryTable,
+  },
 };
 </script>
 
