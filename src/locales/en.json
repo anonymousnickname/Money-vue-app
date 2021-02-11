@@ -66,5 +66,7 @@
   "NoUserWithEmail": "No user with email",
   "WrongPassword": "Invalid password",
   "EmailInUse": "Email is already in use",
-  "Error": "Error"
+  "Error": "Error",
+  "Light": "Light",
+  "Dark": "Dark"
 }

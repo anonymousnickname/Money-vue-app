@@ -34,7 +34,7 @@
           >{{'Message_MinLength'|localize}} {{$v.limit.$params.minValue.min}}</span>
         </div>
 
-        <button class="btn waves-effect waves-light" type="submit">
+        <button class="btn waves-effect waves-light btn-black-bcgr" type="submit">
           {{'Create'|localize}}
           <i class="material-icons right">send</i>
         </button>

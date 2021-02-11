@@ -2,6 +2,15 @@
   <div>
     <div class="page-title">
       <h3>{{ 'ProfileTitle' | localize }}</h3>
+
+      <div class="switch">
+        <label>
+       {{ 'Light' | localize }}
+          <input type="checkbox" @change="selectEvent" v-model="isDark"/>
+          <span class="lever"></span>
+          {{ 'Dark' | localize }}
+        </label>
+      </div>
     </div>
 
     <form class="form" @submit.prevent="submitHandler">
@@ -44,7 +53,9 @@
         </label>
       </div>
 
-      <button class="btn waves-effect waves-light" type="submit">
+      
+
+      <button class="btn waves-effect waves-light btn-black-bcgr" type="submit">
         {{ 'Update' | localize }}
         <i class="material-icons right">send</i>
       </button>
@@ -65,7 +76,8 @@ export default {
   data: () => ({
     name: '',
     bill: '',
-    isRuLocale: true
+    isRuLocale: true,
+    isDark: ''
   }),
   validations: {
     name: { required },
@@ -75,15 +87,16 @@ export default {
     this.name = this.info.name;
     this.bill = this.info.bill;
     this.isRuLocale = this.info.locale === 'ru-RU';
+    this.isDark = this.$store.getters.isDark
     setTimeout(() => {
       M.updateTextFields();
     });
   },
   computed: {
-    ...mapGetters(['info'])
+    ...mapGetters(['info']),
   },
   methods: {
-    ...mapActions(['updateInfo']),
+    ...mapActions(['updateInfo',]),
     async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch();
@@ -97,6 +110,10 @@ export default {
         });
         this.$message(localizeFilter('DataHasBeenUpdated'));
       } catch (e) {}
+    },
+    selectEvent() {
+      this.$store.commit('setTheme', this.isDark)
+      sessionStorage.setItem('setTheme', this.isDark)
     }
   }
 };

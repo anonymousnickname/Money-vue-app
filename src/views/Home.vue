@@ -3,7 +3,7 @@
     <div class="page-title">
       <h3>{{'Bill'|localize}}</h3>
 
-      <button class="btn waves-effect waves-light btn-small" @click="refresh">
+      <button class="btn waves-effect waves-light btn-small btn-black-bcgr" @click="refresh">
         <i class="material-icons">refresh</i>
       </button>
     </div>

@@ -67,5 +67,7 @@
   "NoUserWithEmail": "Пользователя с таким email не существует",
   "WrongPassword": "Неверный пароль",
   "EmailInUse": "Email уже занят",
-  "Error": "Ошибка"
+  "Error": "Ошибка",
+  "Light": "Светлый",
+  "Dark": "Темный"
 }

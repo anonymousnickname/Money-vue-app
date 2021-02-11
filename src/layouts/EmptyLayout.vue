@@ -1,6 +1,8 @@
 <template>
   <div class="empty-layout">
+     <HelpModal />
     <Rules v-if="isRulesShow" />
+   
     <div class="center-empty-form">
       <router-view />
     </div>
@@ -10,8 +12,9 @@
 <script>
 import messages from '@/utils/messages';
 import Rules from '@/components/Rules';
+import HelpModal from '@/components/HelpModal';
 export default {
-  components: { Rules },
+  components: { Rules, HelpModal },
   computed: {
     error() {
       return this.$store.getters.error;
@@ -29,9 +32,9 @@ export default {
 </script>
 
 <style scoped>
- .empty-layout {
-   background-image: url('../assets/img/backround-empty-layout.jpg');
-   background-repeat: no-repeat;
-   background-size: cover;
- }
+.empty-layout {
+  background-image: url('../assets/img/backround-empty-layout.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 </style>

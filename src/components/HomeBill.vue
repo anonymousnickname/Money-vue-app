@@ -1,6 +1,6 @@
 <template>
-  <div class="col s12 m6 l4">
-    <div class="card light-blue bill-card">
+  <div class="col s12 m6 l4" >
+    <div class="card light-blue bill-card btn-black-bcgr">
       <div class="card-content white-text">
         <span class="card-title">{{'BillInCurrency'|localize}}</span>
 
@@ -16,12 +16,12 @@
 export default {
   props: ['rates'],
   data: () => ({
-    currencies: ['RUB', 'USD', 'EUR']
+    currencies: ['UAH', 'USD', 'EUR']
   }),
   computed: {
     base() {
       return (
-        this.$store.getters.info.bill / (this.rates['RUB'] / this.rates['EUR'])
+        this.$store.getters.info.bill / (this.rates['UAH'] / this.rates['EUR'])
       )
     }
   },

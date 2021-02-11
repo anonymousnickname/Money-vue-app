@@ -10,7 +10,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     error: null,
-    rules: false
+    rules: false,
+    isDark: !!sessionStorage.getItem('setTheme') || false
   },
   mutations: {
     setError(state, error) {
@@ -21,18 +22,22 @@ export default new Vuex.Store({
     },
     setRules(state, payload) {
       state.rules = payload
-    }
+    },
+    setTheme(state, payload) {
+      state.isDark = payload
+    } 
   },
   actions: {
     async fetchCurrency() {
       const key = process.env.VUE_APP_FIXER
-      const res = await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,RUB`)
+      const res = await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,UAH`)
       return await res.json()
     }
   },
   getters: {
     error: s => s.error,
-    rules: s => s.rules
+    rules: s => s.rules,
+    isDark: s => s.isDark
   },
   modules: {
     auth, info, category, record

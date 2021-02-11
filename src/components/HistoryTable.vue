@@ -14,7 +14,7 @@
     <tbody>
       <tr v-for="(record, idx) of records" :key="record.id">
         <td>{{ idx + 1 }}</td>
-        <td>{{ record.amount | currency('RUB') }}</td>
+        <td>{{ record.amount | currency('UAH') }}</td>
         <td>{{ record.date | date('datetime') }}</td>
         <td>{{ record.categoryName }}</td>
         <td>
@@ -23,7 +23,7 @@
         <td>
           <button
             v-tooltip="'OpenRecord'"
-            class="btn-small btn"
+            class="btn-small btn btn-black-bcgr"
             @click="$router.push('/detail/' + record.id)"
           >
             <i class="material-icons">open_in_new</i>

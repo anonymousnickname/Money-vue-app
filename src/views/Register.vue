@@ -59,7 +59,7 @@
     </div>
     <div class="card-action">
       <div>
-        <button class="btn btn-dark waves-effect waves-light auth-submit" type="submit">
+        <button class="btn btn-dark waves-effect waves-light auth-submit btn-black-bcgr" type="submit">
           {{'Register'|localize}}
           <i class="material-icons right">send</i>
         </button>

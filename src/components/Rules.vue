@@ -1,26 +1,18 @@
 <template>
-  <div class="rules_wrap">
-    <div class="rules">
-      <div class="cross" @click="closeRulesModal">&times;</div>
-      <h2>{{ 'Rules' | localize }}</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint fuga
-        aperiam magni tempora nulla ex eius vel, ut neque expedita.
-        Exercitationem, odio magni. In qui corporis voluptas excepturi ratione
-        quas. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint fuga
-        aperiam magni tempora nulla ex eius vel, ut neque expedita.
-        Exercitationem, odio magni. In qui corporis voluptas excepturi ratione
-        quas. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint fuga
-        aperiam magni tempora nulla ex eius vel, ut neque expedita.
-        Exercitationem, odio magni. In qui corporis voluptas excepturi ratione
-        quas. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint fuga
-        aperiam magni tempora nulla ex eius vel, ut neque expedita.
-        Exercitationem, odio magni. In qui corporis voluptas excepturi ratione
-        quas. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint fuga
-        aperiam magni tempora nulla ex eius vel, ut neque expedita.
-        Exercitationem, odio magni. In qui corporis voluptas excepturi ratione
-        quas.
-      </p>
+  <div id="myModal" class="modal_wrap">
+    <div class="modal-content">
+      <span class="close" @click="closeRulesModal">&times;</span>
+      <h1>{{ 'Rules' | localize }}</h1>
+      <ul>
+        <ol>
+          <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro, blanditiis architecto illo sit magni suscipit natus quam mollitia eveniet. Perferendis quia quisquam voluptate non. Qui iste ipsum hic in molestiae.</li>
+          <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro, blanditiis architecto illo sit magni suscipit natus quam mollitia eveniet. Perferendis quia quisquam voluptate non. Qui iste ipsum hic in molestiae.</li>
+          <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro, blanditiis architecto illo sit magni suscipit natus quam mollitia eveniet. Perferendis quia quisquam voluptate non. Qui iste ipsum hic in molestiae.</li>
+          <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro, blanditiis architecto illo sit magni suscipit natus quam mollitia eveniet. Perferendis quia quisquam voluptate non. Qui iste ipsum hic in molestiae.</li>
+          <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro, blanditiis architecto illo sit magni suscipit natus quam mollitia eveniet. Perferendis quia quisquam voluptate non. Qui iste ipsum hic in molestiae.</li>
+        </ol>
+      </ul>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, maiores rem dolores iste sapiente beatae eum! Vitae eveniet odit fuga, reprehenderit incidunt soluta nam, assumenda neque repellat dignissimos maiores illo. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, maiores rem dolores iste sapiente. </p>
     </div>
   </div>
 </template>
@@ -30,43 +22,57 @@ export default {
   name: 'Rules',
   methods: {
     closeRulesModal() {
-      this.$store.commit('setRules', false)
+      this.$store.commit('setRules', false);
     }
   }
 };
 </script>
 
 <style scoped>
-.rules {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10000;
-  width: 500px;
-  background: white;
-  padding: 10px 15px;
+.modal_wrap {
+  display: flex; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%; /* Full width */
+  height: 100vh; /* Full height */ /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  align-items: center;
+  justify-content: center;
 }
 
-.rules h2 {
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  min-height: 50vh; /* Could be more or less, depending on screen size */
+}
+.modal-content h1 {
   text-align: center;
 }
 
-.rules_wrap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: black;
-  z-index: 1000000
+.modal-content p {
+  padding: 10px;
 }
 
-.cross {
-  text-align: end;
-  font-size: 45px;
-  position: relative;
-  top: -15px;
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
   cursor: pointer;
 }
 </style>

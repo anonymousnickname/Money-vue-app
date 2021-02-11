@@ -15,6 +15,7 @@ export default {
       try {
         const uid = await dispatch('getUid')
         const records = (await firebase.database().ref(`/users/${uid}/records`).once('value')).val() || {}
+        commit('setRecords', Object.keys(records).map(key => ({...records[key], id: key})))
         return Object.keys(records).map(key => ({...records[key], id: key}))
       } catch (e) {
         commit('setError', e)
@@ -31,5 +32,21 @@ export default {
         throw e
       }
     }
+  },
+  state: {
+    records: []
+  },
+  mutations: {
+    setRecords(state, payload) {
+      state.records = payload
+    },
+    reverseRecords(state) {
+      const newArr = state.records.reverse();
+      state.records = newArr
+      console.log(state.records)
+    }
+  },
+  getters: {
+    getAllRecords: state => state.records
   }
 }
