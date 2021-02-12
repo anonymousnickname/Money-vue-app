@@ -1,8 +1,8 @@
 <template>
   <div class="empty-layout">
-     <HelpModal />
+    <HelpModal />
     <Rules v-if="isRulesShow" />
-   
+
     <div class="center-empty-form">
       <router-view />
     </div>

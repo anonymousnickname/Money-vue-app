@@ -1,12 +1,21 @@
 <template>
   <div>
-    <div v-if="!$store.getters.rules" class="modal-help" :class="{ 'show-modal': showModal }">
+    <div
+      v-if="!$store.getters.rules"
+      class="modal-help"
+      :class="{ 'show-modal': showModal }"
+    >
       <h4>Вам нужна помощь в авторизации?</h4>
       <div class="btn-wrapper" id="btn-wrapper">
-        <button @click="showAcceptModal" class="btn-small btn btn-black-bcgr help-btn">Да</button>
+        <button
+          @click="() => handleModalWindow(false, false, null, 0, false)"
+          class="btn-small btn btn-black-bcgr help-btn"
+        >
+          Да
+        </button>
         <button
           class="btn-small btn btn-black-bcgr help-btn"
-          @click="showModalFalseBtn"
+          @click="() => handleModalWindow(true, true, null, 24000, true, true)"
         >
           Нет
         </button>
@@ -17,7 +26,12 @@
       :class="{ 'hide-modal': hideModalAccept }"
     >
       <div class="modal-help-accept">
-        <div @click="hideModalAcceptFuncCross" class="cross">&times;</div>
+        <div
+          @click="() => handleModalWindow(true, true, null, 10000, true)"
+          class="cross"
+        >
+          &times;
+        </div>
         <div class="login">
           <h2>Вход</h2>
           <div class="login_help_wrap">
@@ -31,7 +45,9 @@
               <div class="login_help_text">
                 1. Введите свою почту в это поле если вы уже имеете аккаунт.
                 Если нет то перейдите на страницу
-                <span class="link-auth pointer" @click="hideModalAcceptFunc"
+                <span
+                  class="link-auth pointer"
+                  @click="() => handleModalWindow(true, true, 'register', 10000, true)"
                   >реестрации</span
                 >
               </div>
@@ -79,7 +95,7 @@
                 Если есть то перейдите на страницу
                 <span
                   class="link-auth pointer"
-                  @click="hideModalAcceptFuncLogin"
+                  @click="() => handleModalWindow(true, true, 'login', 10000, true)"
                   >входа</span
                 >
               </div>
@@ -141,7 +157,7 @@ export default {
   name: 'HelpModal',
   data: () => ({
     showModal: false,
-    hideModalAccept: true,
+    hideModalAccept: true
   }),
   mounted() {
     setTimeout(() => {
@@ -149,37 +165,34 @@ export default {
     }, 4000);
   },
   methods: {
-    showAcceptModal() {
-      this.showModal = false
-       this.hideModalAccept = false;
-    },
-    hideModalAcceptFunc() {
-      this.hideModalAccept = true;
-      this.$router.push('/register');
-       setTimeout( () =>{
-        this.showModal = true
-      }, 10000)
-    },
-    hideModalAcceptFuncCross() {
-      this.hideModalAccept = true;
-      setTimeout( () =>{
-        this.showModal = true
-      }, 10000)
-    },
-    hideModalAcceptFuncLogin() {
-      this.hideModalAccept = true;
-      this.$router.push('/login');
-       setTimeout( () =>{
-        this.showModal = true
-      }, 10000)
-    },
-    showModalFalseBtn() {
-      this.showModal = false
-        setTimeout( () =>{
-        this.showModal = true
-      }, 14000)
+    handleModalWindow(
+      showModal,
+      hideModalAccept,
+      routerPath = null,
+      delay,
+      isSetTimeout,
+      noBtn = false
+    ) {
+      if (!isSetTimeout) {
+        this.showModal = showModal;
+        this.hideModalAccept = hideModalAccept;
+        return;
+      }
+
+      if (noBtn) {
+        this.showModal = !noBtn;
+      }
+
+      this.hideModalAccept = hideModalAccept;
+
+      if (routerPath) {
+        this.$router.push(`/${routerPath}`);
+      }
+      setTimeout(() => {
+        this.showModal = showModal;
+      }, delay);
     }
-  },
+  }
 };
 </script>
 

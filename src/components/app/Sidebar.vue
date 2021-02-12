@@ -1,5 +1,5 @@
 <template>
-  <ul class="sidenav app-sidenav" :class="{open: value, black: isDark}">
+  <ul class="sidenav app-sidenav" :class="{ open: value, black: isDark }">
     <router-link
       v-for="link in links"
       :key="link.url"
@@ -8,13 +8,18 @@
       :to="link.url"
       :exact="link.exact"
     >
-      <a href="#" class="waves-effect waves-black pointer" :class="{'black-text': !isDark}">{{link.title}}</a>
+      <a
+        href="#"
+        class="waves-effect waves-black pointer"
+        :class="{ 'black-text': !isDark }"
+        >{{ link.title }}</a
+      >
     </router-link>
   </ul>
 </template>
 
 <script>
-import localizeFilter from '@/filters/localize.filter'
+import localizeFilter from '@/filters/localize.filter';
 export default {
   props: ['value', 'isDark'],
   data: () => ({
@@ -26,7 +31,7 @@ export default {
       { title: localizeFilter('Menu_Categories'), url: '/categories' }
     ]
   })
-}
+};
 </script>
 
 <style scoped>
@@ -34,7 +39,7 @@ export default {
   background-color: white;
 }
 
-.sidenav li>a {
+.sidenav li > a {
   color: white;
 }
 .sidenav li.active a {
