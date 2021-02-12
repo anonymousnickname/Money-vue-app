@@ -35,7 +35,6 @@ export default {
   }),
   async mounted() {
     if (sessionStorage.getItem('setTheme')) {
-    
       this.$store.commit('setTheme', !!sessionStorage.getItem('setTheme'))
     }
     

@@ -2,7 +2,7 @@
   <div>
     <div class="page-title">
       <h3>{{ 'Menu_Planning' | localize }}</h3>
-      <h4>{{ info.bill | currency('RUB') }}</h4>
+      <h4>{{ info.bill | currency('UAH') }}</h4>
     </div>
 
     <div class="center-own" v-if="loading">
@@ -46,16 +46,19 @@ export default {
   },
   data: () => ({
     loading: true,
+    cats: [],
+    record: [],
     categories: [],
   }),
   computed: {
     ...mapGetters(['info']),
   },
   async mounted() {
-    const records = await this.$store.dispatch('fetchRecords');
-    const categoires = await this.$store.dispatch('fetchCategories');
-    this.categories = categoires.map((cat) => {
-      const spend = records
+    this.records = await this.$store.dispatch('fetchRecords');
+    this.cats = await this.$store.dispatch('fetchCategories');
+    this.categories =  this.cats.filter( el => el.outcome === true);
+    this.categories =  this.categories.map((cat) => {
+      const spend = this.records
         .filter((r) => r.categoryId === cat.id)
         .filter((r) => r.type === 'outcome')
         .reduce((total, record) => {

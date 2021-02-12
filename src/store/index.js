@@ -11,6 +11,7 @@ export default new Vuex.Store({
   state: {
     error: null,
     rules: false,
+    currency: {},
     isDark: !!sessionStorage.getItem('setTheme') || false
   },
   mutations: {
@@ -25,19 +26,25 @@ export default new Vuex.Store({
     },
     setTheme(state, payload) {
       state.isDark = payload
-    } 
+    },
+    setCurrency(state, payload) {
+      state.currency = payload
+    }
   },
   actions: {
-    async fetchCurrency() {
+    async fetchCurrency({commit}) {
       const key = process.env.VUE_APP_FIXER
       const res = await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,UAH`)
-      return await res.json()
+      const body = await res.json()
+      commit('setCurrency', body)
+      return await body
     }
   },
   getters: {
     error: s => s.error,
     rules: s => s.rules,
-    isDark: s => s.isDark
+    isDark: s => s.isDark,
+    currency: s => s.currency
   },
   modules: {
     auth, info, category, record

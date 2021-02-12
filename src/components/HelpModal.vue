@@ -187,8 +187,8 @@ export default {
 .modal-help {
   display: none;
   position: absolute !important;
-  right: 0;
-  bottom: 100px;
+  right: 20px;
+  bottom: 20px;
   width: 400px;
   height: 180px;
   position: relative;
@@ -196,7 +196,20 @@ export default {
   border-radius: 25px;
   color: black;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: 3s infinite alternate slidein;
+  animation-iteration-count: 1;
 }
+
+@keyframes slidein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .modal-help h4 {
   font-family: 'Montserrat', sans-serif;
   text-align: center;

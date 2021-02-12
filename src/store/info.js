@@ -21,6 +21,7 @@ export default {
           .database()
           .ref(`/users/${uid}/info`)
           .update(updateData)
+        await dispatch('fetchCategories')
         commit('setInfo', updateData)
       } catch (e) {
         commit('setError', e)

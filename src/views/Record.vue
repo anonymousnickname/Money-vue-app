@@ -5,8 +5,8 @@
     </div>
 
     <div class="center-own" v-if="loading">
-    <Loader  />
-</div>
+      <Loader />
+    </div>
 
     <p class="center" v-else-if="!categories.length">
       {{ 'NoCategories' | localize }}.
@@ -115,7 +115,12 @@ export default {
     description: { required }
   },
   async mounted() {
-    this.categories = await this.$store.dispatch('fetchCategories');
+    if (!this.$store.getters.getAllCategories.length) {
+      this.categories = await this.$store.dispatch('fetchCategories');
+    } else {
+      this.categories = this.$store.getters.getAllCategories;
+    }
+
     this.loading = false;
     if (this.categories.length) {
       this.category = this.categories[0].id;
@@ -158,6 +163,7 @@ export default {
           this.$v.$reset();
           this.amount = 1;
           this.description = '';
+          
         } catch (e) {}
       } else {
         this.$message(

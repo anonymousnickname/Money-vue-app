@@ -52,20 +52,22 @@ export default {
   data: () => ({
     loading: true,
     records: [],
-    newArr: [],
-    cats: [],
+    outComeArray: [],
+    categoires: [],
+
   }),
   async mounted() {
     this.records = await this.$store.dispatch('fetchRecords');
-    const categoires = await this.$store.dispatch('fetchCategories');
-    this.cats = categoires;
-    this.newArr = this.records.map((r) => {
-      return categoires.find(
+    this.categoires = await this.$store.dispatch('fetchCategories');
+    this.outComeArray = this.records.map((r) => {
+      return this.categoires.find(
         (c) => r.categoryId === c.id && r.type === 'outcome'
       );
     });
-    const testArr = this.newArr.filter((el) => el != null);
-    this.setup(testArr);
+    const filteredArr = this.outComeArray.filter((el) => el != null);
+    let s = new Set();
+    filteredArr.map(el => s.add(el))
+    this.setup([...s]);
     this.loading = false;
   },
   methods: {
@@ -74,7 +76,7 @@ export default {
         this.records.map((record) => {
           return {
             ...record,
-            categoryName: this.cats.find((c) => c.id === record.categoryId)
+            categoryName: this.categoires.find((c) => c.id === record.categoryId)
               .title,
             typeClass: record.type === 'income' ? 'green' : 'red',
             typeText:

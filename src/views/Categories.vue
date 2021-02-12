@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{'Categories'|localize}}</h3>
+      <h3>{{ 'Categories' | localize }}</h3>
     </div>
     <section>
-     <div class="center-own" v-if="loading">
-    <Loader  />
-</div>
+      <div class="center-own" v-if="loading">
+        <Loader />
+      </div>
       <div class="row" v-else>
-        <CategoryCreate @created="addNewCategory"/>
+        <CategoryCreate @created="addNewCategory" />
 
         <CategoryEdit
           v-if="categories.length"
@@ -16,21 +16,21 @@
           :key="categories.length + updateCount"
           @updated="updateCategories"
         />
-        <p v-else class="center">{{'NoCategories'|localize}}</p>
+        <p v-else class="center">{{ 'NoCategories' | localize }}</p>
       </div>
     </section>
   </div>
 </template>
 
 <script>
-import CategoryCreate from '@/components/CategoryCreate'
-import CategoryEdit from '@/components/CategoryEdit'
+import CategoryCreate from '@/components/CategoryCreate';
+import CategoryEdit from '@/components/CategoryEdit';
 export default {
   name: 'categories',
   metaInfo() {
     return {
       title: this.$title('Menu_Categories')
-    }
+    };
   },
   data: () => ({
     categories: [],
@@ -38,8 +38,13 @@ export default {
     updateCount: 0
   }),
   async mounted() {
-    this.categories = await this.$store.dispatch('fetchCategories')
-    this.loading = false
+    if (!this.$store.getters.getAllCategories.length) {
+      this.categories = await this.$store.dispatch('fetchCategories');
+    } else {
+      this.categories = this.$store.getters.getAllCategories;
+    }
+
+    this.loading = false;
   },
   components: {
     CategoryCreate,
@@ -47,14 +52,14 @@ export default {
   },
   methods: {
     addNewCategory(category) {
-      this.categories.push(category)
+      this.categories.push(category);
     },
     updateCategories(category) {
-      const idx = this.categories.findIndex(c => c.id === category.id)
-      this.categories[idx].title = category.title
-      this.categories[idx].limit = category.limit
-      this.updateCount++
+      const idx = this.categories.findIndex(c => c.id === category.id);
+      this.categories[idx].title = category.title;
+      this.categories[idx].limit = category.limit;
+      this.updateCount++;
     }
   }
-}
+};
 </script>

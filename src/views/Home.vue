@@ -30,15 +30,20 @@ export default {
   name: 'home',
   metaInfo() {
     return {
-      title: this.$title('Menu_Bill'),
+      title: this.$title('Menu_Bill')
     };
   },
   data: () => ({
     loading: true,
-    currency: null,
+    currency: null
   }),
   async mounted() {
-    this.currency = await this.$store.dispatch('fetchCurrency');
+    if (!Object.keys(this.$store.getters.currency).length) {
+      this.currency = await this.$store.dispatch('fetchCurrency');
+    } else {
+      this.currency = this.$store.getters.currency;
+    }
+
     this.loading = false;
   },
   methods: {
@@ -46,11 +51,11 @@ export default {
       this.loading = true;
       this.currency = await this.$store.dispatch('fetchCurrency');
       this.loading = false;
-    },
+    }
   },
   components: {
     HomeBill,
-    HomeCurrency,
-  },
+    HomeCurrency
+  }
 };
 </script>
