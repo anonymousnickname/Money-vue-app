@@ -4,7 +4,7 @@
       <Loader />
     </div>
     <div class="app-main-layout" v-else>
-      <Navbar :isDark="isDark" @click="isOpen = !isOpen" />
+      <Navbar :isDark="isDark" :isMenuOpen="isOpen" @click="isOpen = !isOpen" />
 
       <Sidebar :isDark="isDark" v-model="isOpen" :key="locale" />
 

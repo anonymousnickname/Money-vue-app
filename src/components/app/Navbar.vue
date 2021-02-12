@@ -7,7 +7,8 @@
           @click.prevent="$emit('click')"
           :class="{ 'black-text': !isDark }"
         >
-          <i class="material-icons ">dehaze</i>
+          <i v-if="isMenuOpen" class="material-icons ">menu_open</i>
+          <i v-else class="material-icons ">dehaze</i>
         </a>
         <span
           class="pointer"
@@ -84,6 +85,9 @@ export default {
     isDark: {
       type: Boolean,
       default: true
+    },
+    isMenuOpen: {
+      type: Boolean
     }
   },
   methods: {
@@ -112,7 +116,12 @@ export default {
   },
   computed: {
     name() {
-      return this.$store.getters.info.name;
+      if (this.$store.getters.info.name) {
+        return (
+          this.$store.getters.info.name[0].toUpperCase() +
+          this.$store.getters.info.name.slice(1)
+        );
+      }
     },
     bill() {
       return this.$store.getters.info.bill;
@@ -147,7 +156,7 @@ export default {
 .bottom-30 h5:after {
   content: '';
   position: absolute;
-  left: 170px;
+  padding-left: 1px;
   bottom: 10px;
   border: 7px solid transparent; /* Прозрачные границы */
   border-top: 7px solid white; /* Добавляем треугольник */
