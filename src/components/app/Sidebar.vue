@@ -36,11 +36,11 @@ export default {
 
 <style scoped>
 .sidenav.black li.active {
-  background-color: white;
+  background-color: #fff;
 }
 
 .sidenav li > a {
-  color: white;
+  color: #fff;
 }
 .sidenav li.active a {
   color: #000;

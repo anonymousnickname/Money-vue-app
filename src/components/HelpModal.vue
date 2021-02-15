@@ -254,7 +254,7 @@ export default {
 .modal-help-accept {
   width: 80%;
   height: 90%;
-  background: white;
+  background: #fff;
   position: relative;
   display: flex;
 }
@@ -317,7 +317,7 @@ export default {
 }
 
 ::-webkit-scrollbar-track {
-  background: white;
+  background: #fff;
 }
 
 ::-webkit-scrollbar-thumb {

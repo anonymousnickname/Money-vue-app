@@ -159,7 +159,7 @@ export default {
   padding-left: 1px;
   bottom: 10px;
   border: 7px solid transparent; /* Прозрачные границы */
-  border-top: 7px solid white; /* Добавляем треугольник */
+  border-top: 7px solid #fff; /* Добавляем треугольник */
 }
 
 .blackArrow::after {
