@@ -2,10 +2,10 @@
   <div>
     <div class="page-title">
       <h3>{{ 'History_Title' | localize }}</h3>
-      {{ 'Outcome' | localize }}
     </div>
 
     <div class="history-chart">
+      <h5 class="text-center">{{ 'GrafficOfOutcome' | localize }}</h5>
       <h3 class="text-center"></h3>
       <canvas ref="canvas"></canvas>
     </div>
@@ -44,7 +44,7 @@ export default {
   name: 'history',
   metaInfo() {
     return {
-      title: this.$title('Menu_History'),
+      title: this.$title('Menu_History')
     };
   },
   extends: Pie,
@@ -53,45 +53,44 @@ export default {
     loading: true,
     records: [],
     outComeArray: [],
-    categoires: [],
-
+    categoires: []
   }),
   async mounted() {
     this.records = await this.$store.dispatch('fetchRecords');
     this.categoires = await this.$store.dispatch('fetchCategories');
-    this.outComeArray = this.records.map((r) => {
+    this.outComeArray = this.records.map(r => {
       return this.categoires.find(
-        (c) => r.categoryId === c.id && r.type === 'outcome'
+        c => r.categoryId === c.id && r.type === 'outcome'
       );
     });
-    const filteredArr = this.outComeArray.filter((el) => el != null);
+    const filteredArr = this.outComeArray.filter(el => el != null);
     let s = new Set();
-    filteredArr.map(el => s.add(el))
+    filteredArr.map(el => s.add(el));
     this.setup([...s]);
     this.loading = false;
   },
   methods: {
     setup(data) {
       this.setupPagination(
-        this.records.map((record) => {
+        this.records.map(record => {
           return {
             ...record,
-            categoryName: this.categoires.find((c) => c.id === record.categoryId)
+            categoryName: this.categoires.find(c => c.id === record.categoryId)
               .title,
             typeClass: record.type === 'income' ? 'green' : 'red',
             typeText:
               record.type === 'income'
                 ? localizeFilter('Income')
-                : localizeFilter('Outcome'),
+                : localizeFilter('Outcome')
           };
         })
       );
       this.renderChart({
-        labels: data.map((c) => c.title),
+        labels: data.map(c => c.title),
         datasets: [
           {
             label: localizeFilter('CostsForCategories'),
-            data: data.map((c) => {
+            data: data.map(c => {
               return this.records.reduce((total, r) => {
                 if (r.categoryId === c.id && r.type === 'outcome') {
                   total += +r.amount;
@@ -105,18 +104,18 @@ export default {
               'rgba(255, 206, 86, 0.2)',
               'rgba(75, 192, 192, 0.2)',
               'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
             ],
             borderColor: ['black', 'black', 'black', 'black', 'black', 'black'],
-            borderWidth: 1,
-          },
-        ],
+            borderWidth: 1
+          }
+        ]
       });
-    },
+    }
   },
   components: {
-    HistoryTable,
-  },
+    HistoryTable
+  }
 };
 </script>
 

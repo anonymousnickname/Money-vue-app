@@ -70,5 +70,7 @@
   "Error": "Ошибка",
   "Light": "Светлый",
   "Dark": "Темный",
-  "Forplanning": "Для планировки ваших рассходов"
+  "Forplanning": "Для планировки ваших рассходов",
+  "OutcomeGenetive": "расходов",
+  "GrafficOfOutcome": "Граффик расходов"
 }
