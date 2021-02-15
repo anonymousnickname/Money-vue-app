@@ -64,9 +64,9 @@ export default {
       );
     });
     const filteredArr = this.outComeArray.filter(el => el != null);
-    let s = new Set();
-    filteredArr.map(el => s.add(el));
-    this.setup([...s]);
+    let set = new Set();
+    filteredArr.map(el => set.add(el));
+    this.setup([...set]);
     this.loading = false;
   },
   methods: {
