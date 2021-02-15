@@ -43,6 +43,6 @@ export default {
   color: white;
 }
 .sidenav li.active a {
-  color: black;
+  color: #000;
 }
 </style>

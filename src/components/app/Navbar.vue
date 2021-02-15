@@ -163,7 +163,7 @@ export default {
 }
 
 .blackArrow::after {
-  border-top-color: black !important;
+  border-top-color: #000 !important;
 }
 
 .money {

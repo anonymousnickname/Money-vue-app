@@ -207,7 +207,7 @@ export default {
   position: relative;
   background: #ffffff;
   border-radius: 25px;
-  color: black;
+  color: #000;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   animation: 3s infinite alternate slidein;
   animation-iteration-count: 1;
@@ -263,7 +263,7 @@ export default {
   right: 2%;
   top: 0%;
   font-size: 40px;
-  color: black;
+  color: #000;
   cursor: pointer;
 }
 .modal-help-accept::before {
@@ -271,7 +271,7 @@ export default {
   display: block;
   height: 100%;
   width: 1px;
-  background: black;
+  background: #000;
   position: absolute;
   left: 50%;
   transform: translate(-50%);
@@ -321,7 +321,7 @@ export default {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: black;
+  background: #000;
 }
 
 ::-webkit-scrollbar-thumb:hover {

@@ -14,7 +14,7 @@
 
 .auth-card {
   width: 500px;
-  box-shadow: 1px 1px 20px black!important;
+  box-shadow: 1px 1px 20px #000!important;
 }
 
 .auth-submit {
@@ -199,7 +199,7 @@
   position: absolute;
   right: 30px;
   cursor: pointer;
-  color: black;
+  color: #000;
   text-decoration: underline;
 }
 
@@ -211,12 +211,12 @@
 }
 
 .link-auth, .app_title {
-  color: black!important;
+  color: #000!important;
   font-weight: bold!important;
 }
 
 .btn-black-bcgr,  .switch label input[type=checkbox]:checked+.lever, .switch label input[type=checkbox]:checked+.lever:after, [type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:after {
-  background-color: black!important;
+  background-color: #000!important;
 }
 
 .dropdown-content li>a, .dropdown-content li>span {
