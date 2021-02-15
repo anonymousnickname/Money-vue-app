@@ -1,7 +1,7 @@
 <template>
   <div class="empty-layout">
     <HelpModal />
-    <Rules v-if="isRulesShow" />
+    <RulesModal v-if="isRulesShow" />
 
     <div class="center-empty-form">
       <router-view />
@@ -11,10 +11,10 @@
 
 <script>
 import messages from '@/utils/messages';
-import Rules from '@/components/Rules';
+import RulesModal from '@/components/RulesModal';
 import HelpModal from '@/components/HelpModal';
 export default {
-  components: { Rules, HelpModal },
+  components: { RulesModal, HelpModal },
   computed: {
     error() {
       return this.$store.getters.error;

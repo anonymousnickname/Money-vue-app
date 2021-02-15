@@ -50,7 +50,7 @@
 
 <script>
 export default {
-  name: 'Rules',
+  name: 'RulesModal',
   methods: {
     closeRulesModal() {
       const { commit } = this.$store;
