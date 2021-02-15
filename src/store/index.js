@@ -12,7 +12,8 @@ export default new Vuex.Store({
     error: null,
     rules: false,
     currency: {},
-    isDark: !!sessionStorage.getItem('setTheme') || false
+    isDark: !!sessionStorage.getItem('setTheme') || false,
+    locale: 'ru-RU'
   },
   mutations: {
     setError(state, error) {
@@ -29,6 +30,9 @@ export default new Vuex.Store({
     },
     setCurrency(state, payload) {
       state.currency = payload
+    },
+    setLanguage(state, payload) {
+      state.locale = payload
     }
   },
   actions: {
@@ -44,7 +48,8 @@ export default new Vuex.Store({
     error: s => s.error,
     rules: s => s.rules,
     isDark: s => s.isDark,
-    currency: s => s.currency
+    currency: s => s.currency,
+    locale: s => s.locale,
   },
   modules: {
     auth, info, category, record

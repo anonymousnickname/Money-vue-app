@@ -56,7 +56,7 @@ export default {
       return this.$store.getters.error;
     },
     locale() {
-      return this.$store.getters.info.locale;
+      return this.$store.getters.locale;
     },
     isDark() {
       return this.$store.getters.isDark;

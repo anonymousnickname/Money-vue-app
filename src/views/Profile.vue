@@ -5,8 +5,21 @@
 
       <div class="switch">
         <label>
-       {{ 'Light' | localize }}
-          <input type="checkbox" @change="selectEvent" v-model="isDark"/>
+          English
+          <input
+            type="checkbox"
+            @change="selectLanguage"
+            v-model="isRuLocale"
+          />
+          <span class="lever"></span>
+          Русский
+        </label>
+      </div>
+
+      <div class="switch">
+        <label>
+          {{ 'Light' | localize }}
+          <input type="checkbox" @change="selectEvent" v-model="isDark" />
           <span class="lever"></span>
           {{ 'Dark' | localize }}
         </label>
@@ -44,17 +57,6 @@
         >
       </div>
 
-      <div class="switch">
-        <label>
-          English
-          <input type="checkbox" v-model="isRuLocale" />
-          <span class="lever"></span>
-          Русский
-        </label>
-      </div>
-
-      
-
       <button class="btn waves-effect waves-light btn-black-bcgr" type="submit">
         {{ 'Update' | localize }}
         <i class="material-icons right">send</i>
@@ -86,17 +88,17 @@ export default {
   mounted() {
     this.name = this.info.name;
     this.bill = this.info.bill;
-    this.isRuLocale = this.info.locale === 'ru-RU';
-    this.isDark = this.$store.getters.isDark
+    this.isRuLocale = this.$store.getters.locale === 'ru-RU';
+    this.isDark = this.$store.getters.isDark;
     setTimeout(() => {
       M.updateTextFields();
     });
   },
   computed: {
-    ...mapGetters(['info']),
+    ...mapGetters(['info'])
   },
   methods: {
-    ...mapActions(['updateInfo',]),
+    ...mapActions(['updateInfo']),
     async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch();
@@ -105,15 +107,18 @@ export default {
       try {
         await this.updateInfo({
           name: this.name,
-          bill: this.bill,
-          locale: this.isRuLocale ? 'ru-RU' : 'en-US'
+          bill: this.bill
         });
         this.$message(localizeFilter('DataHasBeenUpdated'));
       } catch (e) {}
     },
     selectEvent() {
-      this.$store.commit('setTheme', this.isDark)
-      sessionStorage.setItem('setTheme', this.isDark)
+      this.$store.commit('setTheme', this.isDark);
+      sessionStorage.setItem('setTheme', this.isDark);
+    },
+    selectLanguage() {
+      const lanugage = this.isRuLocale === true ? 'ru-RU' : 'en-US';
+      this.$store.commit('setLanguage', lanugage);
     }
   }
 };
